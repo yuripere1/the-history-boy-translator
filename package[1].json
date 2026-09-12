@@ -1,0 +1,7 @@
+{
+  "name": "history-boy-translator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI-powered History Boy voice translator using OpenRouter",
+  "scripts": {"start": "node server.js"}
+}

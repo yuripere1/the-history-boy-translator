@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>History Boy Translator</title>
+<style>
+:root{--bg:#f5f3ef;--card:#fff;--ink:#202020;--muted:#777;--line:#ddd8d0}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.wrap{max-width:1100px;margin:auto;padding:42px 22px}.top{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:28px}
+h1{font-size:34px;letter-spacing:-1.2px;margin:0 0 7px}.sub{color:var(--muted);max-width:720px;line-height:1.5}.badge{border:1px solid var(--line);border-radius:999px;padding:8px 12px;font-size:12px;color:var(--muted);background:#fff}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 5px 20px rgba(0,0,0,.03)}
+label{display:block;font-size:13px;font-weight:650;margin-bottom:9px}.hint{font-size:12px;color:var(--muted);font-weight:400;margin-left:6px}
+textarea{width:100%;min-height:310px;resize:vertical;border:1px solid var(--line);border-radius:12px;padding:14px;font:15px/1.6 inherit;outline:none}
+textarea:focus{border-color:#999}.controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:650}button.primary{background:#222;color:#fff;border-color:#222}
+button:hover{transform:translateY(-1px)}button:disabled{opacity:.55;cursor:wait;transform:none}
+.status{margin-top:12px;font-size:12px;color:var(--muted);min-height:18px}.settings{margin-top:18px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}input{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;background:white}
+.reference{margin-top:18px}.reference summary{cursor:pointer;color:#555;font-size:13px}.reference pre{white-space:pre-wrap;font:13px/1.55 inherit;color:#555;background:#faf9f7;border:1px solid var(--line);padding:14px;border-radius:12px}
+.warning{margin-top:12px;padding:12px;border-radius:10px;background:#f7f2e8;color:#6d604b;font-size:12px;line-height:1.5}
+footer{margin-top:20px;color:#999;font-size:12px;text-align:center}@media(max-width:800px){.grid,.row{grid-template-columns:1fr}.top{align-items:start;flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top"><div><h1>History Boy Translator</h1><div class="sub">AI-powered translation into the direct, affectionate, low-pressure texting voice from your reference.</div></div><div class="badge">OpenRouter + free model</div></div>
+
+<div class="grid">
+<section class="card">
+<label for="source">Source text</label>
+<textarea id="source" placeholder="what do you think of my hat?"></textarea>
+<div class="controls"><button class="primary" id="translate">Translate</button><button id="example">Load example</button><button id="clear">Clear</button></div>
+</section>
+<section class="card">
+<label for="output">History Boy version</label>
+<textarea id="output" readonly placeholder="Your translation will appear here..."></textarea>
+<div class="controls"><button id="copy">Copy</button><button id="swap">Use as source</button></div>
+<div class="status" id="status"></div>
+</section>
+</div>
+
+<section class="card settings">
+<div class="row">
+<div><label for="endpoint">Backend endpoint</label><input id="endpoint" value="http://localhost:3000/api/translate"></div>
+<div><label for="model">OpenRouter model</label><input id="model" value="openrouter/free"></div>
+</div>
+<div class="warning"><strong>Security:</strong> Your OpenRouter API key belongs on the backend, never in this HTML file. The included server reads it from the <code>OPENROUTER_API_KEY</code> environment variable.</div>
+</section>
+
+<section class="card reference"><details><summary>Voice rules</summary><pre>Direct and conversational. Emotionally open. Affectionate without being overly poetic.
+Apologetic whenever the speaker thinks they crossed a boundary.
+Reassuring and low-pressure. Informal and somewhat spontaneous.
+Occasionally awkward or grammatically incomplete in a natural, human way.
+Short sentences, fragments, simple clauses, line breaks and natural repetition.
+Prefer ordinary vocabulary: cool, absolutely, very, just, feel free, whenever, ready,
+talk, text, respond, sorry, apologize, no worries, special, brighter, love, miss,
+catch up, tell me, until then, pard, bf, set, studio, footage.
+Preserve meaning above all else. Do not add emotional intensity, affection, romance,
+or apology that isn't present. Do not polish the result into formal prose.</pre></details></section>
+<footer>For production deployment, host the backend over HTTPS and restrict CORS to your site.</footer>
+</div>
+
+<script>
+const source=document.getElementById("source"),output=document.getElementById("output"),status=document.getElementById("status");
+async function translate(){
+ const text=source.value.trim(); if(!text){status.textContent="Add some source text first.";return}
+ const endpoint=document.getElementById("endpoint").value.trim();
+ const model=document.getElementById("model").value.trim()||"openrouter/free";
+ status.textContent="Translating..."; document.getElementById("translate").disabled=true;
+ try{
+  const r=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text,model})});
+  const d=await r.json(); if(!r.ok) throw new Error(d.error||"Request failed");
+  output.value=d.translation||""; status.textContent="Done.";
+ }catch(e){status.textContent=e.message||"Could not reach the translator backend."}
+ finally{document.getElementById("translate").disabled=false}
+}
+document.getElementById("translate").onclick=translate;
+document.getElementById("example").onclick=()=>{source.value="what do you think of my hat?";translate()};
+document.getElementById("clear").onclick=()=>{source.value="";output.value="";status.textContent=""};
+document.getElementById("copy").onclick=async()=>{if(output.value){await navigator.clipboard.writeText(output.value);status.textContent="Copied."}};
+document.getElementById("swap").onclick=()=>{source.value=output.value;output.value="";status.textContent=""};
+</script>
+</body>
+</html>
