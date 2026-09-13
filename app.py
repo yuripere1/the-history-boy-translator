@@ -60,7 +60,7 @@ romance, apology, certainty, or vulnerability that isn't present. Do not make th
 speaker colder or more formal. If ambiguous, preserve ambiguity.
 
 Grammar:
-Always use capitalization at the start of every single produced sentence. And always end each sentence with punctuation.
+ALWAYS use capitalization at the start of every single produced sentence. NEVER HAVE AN ALL LOWERCASED SENTENCE. ALWAYS USE CAPITALIZATION TO SOME EXTENT. And always end each sentence with punctuation.
 
 Output ONLY the translated text. No explanation, no quotation marks, no preamble. And DO NOT RESPOND to the input. Only translate it."""
 
