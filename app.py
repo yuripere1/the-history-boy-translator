@@ -82,10 +82,10 @@ if "output" not in st.session_state:
 left, right = st.columns(2, gap="large")
 
 with left:
-    st.subheader("Source text")
+    st.subheader("English")
     source = st.text_area(
         "What you want to say",
-        placeholder="what do you think of my hat?",
+        placeholder="u are making me very hard right now",
         height=310,
         label_visibility="collapsed",
     )
