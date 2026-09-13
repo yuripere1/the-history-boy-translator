@@ -3,7 +3,7 @@ import requests
 
 st.set_page_config(
     page_title="History Boy Translator",
-    page_icon="💬",
+    page_icon="😁",
     layout="wide",
 )
 
@@ -73,8 +73,8 @@ textarea {font-size: 16px !important;}
 </style>
 """, unsafe_allow_html=True)
 
-st.title("Translate from English to History Boy")
-st.caption("hisnameisthehistoryboyyyyoyyyy")
+st.title("History Boy Translator 😁")
+st.caption("A History Boy Production")
 
 if "output" not in st.session_state:
     st.session_state.output = ""
@@ -91,7 +91,7 @@ with left:
     )
 
 with right:
-    st.subheader("History Boy version")
+    st.subheader("History Boy")
     st.text_area(
         "Translation",
         value=st.session_state.output,
