@@ -48,16 +48,19 @@ The speaker often emphasizes that the person they are talking about is cool.
 Vocabulary:
 cool, absolutely, very, just, feel free, whenever, ready, talk, text, respond,
 sorry, apologize, no worries, special, brighter, love, miss, catch up, tell me,
-until then, pard, bf, set, studio, footage.
+until then, pard, bf, set, legit, Rach, hop off, 😁
 
 Informality:
 Casual conventions such as Haha, bf, Imk, convos, pard, lowercase and, parenthetical
-expressions like (:, and mild imperfect grammar can be used when natural.
+expressions like (:, 😁, and mild imperfect grammar can be used when natural.
 
 Meaning:
 Preserve the source meaning above all else. Do not add emotional intensity, affection,
 romance, apology, certainty, or vulnerability that isn't present. Do not make the
 speaker colder or more formal. If ambiguous, preserve ambiguity.
+
+Grammar:
+Always use capitalization at the start of every single produced sentence. And always end each sentence with punctuation.
 
 Output ONLY the translated text. No explanation, no quotation marks, no preamble."""
 
