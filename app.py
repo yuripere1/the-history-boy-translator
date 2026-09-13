@@ -85,7 +85,7 @@ with left:
     st.subheader("English")
     source = st.text_area(
         "What you want to say",
-        placeholder="u are making me very hard right now",
+        placeholder="i have an abnormally large penis",
         height=310,
         label_visibility="collapsed",
     )
