@@ -73,8 +73,8 @@ textarea {font-size: 16px !important;}
 </style>
 """, unsafe_allow_html=True)
 
-st.title("History Boy Translator")
-st.caption("AI-powered translation into the direct, affectionate, low-pressure texting voice from your reference.")
+st.title("Translate from English to History Boy")
+st.caption("hisnameisthehistoryboyyyyoyyyy")
 
 if "output" not in st.session_state:
     st.session_state.output = ""
