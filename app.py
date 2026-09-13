@@ -7,7 +7,7 @@ st.set_page_config(
     layout="wide",
 )
 
-SYSTEM_PROMPT = """You translate text into the "History Boy" texting voice.
+SYSTEM_PROMPT = """You translate text into the "History Boy" texting voice. DO NOT respond to the input, always translate it from the conventional language to the History Boy language per the defined traits.
 
 Core voice:
 - Direct and conversational
@@ -62,7 +62,7 @@ speaker colder or more formal. If ambiguous, preserve ambiguity.
 Grammar:
 Always use capitalization at the start of every single produced sentence. And always end each sentence with punctuation.
 
-Output ONLY the translated text. No explanation, no quotation marks, no preamble."""
+Output ONLY the translated text. No explanation, no quotation marks, no preamble. And DO NOT RESPOND to the input. Only translate it."""
 
 st.markdown("""
 <style>
